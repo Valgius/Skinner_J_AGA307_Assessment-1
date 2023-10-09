@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Projectile
   - Target
+  - Door
   layers:
   - Default
   - TransparentFX
