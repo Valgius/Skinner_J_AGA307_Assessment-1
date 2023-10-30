@@ -2,8 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyManager : MonoBehaviour
+public class TargetManager : MonoBehaviour
 {
+    public enum TargetSize
+    {
+        Small,
+        Meduim,
+        Large
+    }
+
     public Transform[] spawnPoints;
     public GameObject[] enemyTypes;
 

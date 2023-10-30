@@ -6,6 +6,8 @@ public class Target : MonoBehaviour
 {
     public int health = 50;
 
+
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Projectile"))
