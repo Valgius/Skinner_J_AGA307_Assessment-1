@@ -16,6 +16,5 @@ public class Projectile : MonoBehaviour
             //Destroy this gameobject
             Destroy(this.gameObject);
         }
-    }
-        
+    }  
 }

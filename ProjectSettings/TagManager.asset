@@ -7,6 +7,7 @@ TagManager:
   - Projectile
   - Target
   - Door
+  - Sphere
   layers:
   - Default
   - TransparentFX

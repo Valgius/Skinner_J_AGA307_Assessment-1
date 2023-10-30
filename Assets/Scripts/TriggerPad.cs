@@ -12,15 +12,8 @@ public class TriggerPad : MonoBehaviour
         {
             //change the spheres colour to green
             sphere.GetComponent<Renderer>().material.color = Color.green;
-        }
-    }
-
-    void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
             //Increas the spheres scale by 0.01 on all axis
-            sphere.transform.localScale = Vector3.one * 0.01f;
+            sphere.transform.localScale = Vector3.one * 2f;
         }
     }
 
@@ -31,7 +24,7 @@ public class TriggerPad : MonoBehaviour
             //set the spheres size back to 1
             sphere.transform.localScale = Vector3.one;
             //Change the spheres colour to yellow
-            sphere.GetComponent<Renderer>().material.color = Color.yellow;
+            sphere.GetComponent<Renderer>().material.color = Color.white;
         }
     }
 }
