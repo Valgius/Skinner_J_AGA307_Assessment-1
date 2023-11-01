@@ -7,9 +7,10 @@ public class TargetManager : MonoBehaviour
     public enum TargetSize
     {
         Small,
-        Meduim,
+        Medium,
         Large
     }
+
 
     public Transform[] spawnPoints;
     public GameObject[] enemyTypes;
