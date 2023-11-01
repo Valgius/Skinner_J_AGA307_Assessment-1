@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
@@ -6,6 +7,8 @@ using static TargetManager;
 
 public class Target : MonoBehaviour
 {
+    public static event Action<GameObject> OnTargetHit = null;
+    public static event Action<GameObject> OnTargetDie = null;
 
     //public PatrolType myPatrol;
     float baseSpeed = 1f;
@@ -52,10 +55,10 @@ public class Target : MonoBehaviour
                 break;
         }
 
-        StartCoroutine(Move());
+        //StartCoroutine(Move());
     }
 
-    IEnumerator Move()
+   /* IEnumerator Move()
     {
         for (int i = 0; i < moveDistance; i++)
         {
@@ -65,8 +68,32 @@ public class Target : MonoBehaviour
         transform.Rotate(Vector3.up * 180);
         yield return new WaitForSeconds(Random.Range(1, 3));
         StartCoroutine(Move());
+    }*/
+
+    void Hit(int _damage)
+    {
+        myHealth -= _damage;
+
+        if (myHealth <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            OnTargetHit?.Invoke(this.gameObject);
+            ///_GM.AddScore(myScore);
+        }
     }
 
+    void Die()
+    {
+        StopAllCoroutines();
+        OnTargetDie?.Invoke(this.gameObject);
+
+        //_GM.AddScore(myScore * 2);
+        //_EM.KillEnemy(this.gameObject);
+        //Destroy(this.gameObject);
+    }
 
     //private void OnCollisionEnter(Collision collision)
     // {

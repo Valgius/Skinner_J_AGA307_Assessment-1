@@ -2,15 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TargetManager : MonoBehaviour
+public class TargetManager : Singleton<TargetManager>
 {
-    public enum TargetSize
-    {
-        Small,
-        Medium,
-        Large
-    }
-
+    public enum TargetSize { Small, Medium, Large}
 
     public Transform[] spawnPoints;
     public GameObject[] enemyTypes;
