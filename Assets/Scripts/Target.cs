@@ -5,7 +5,7 @@ using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
 using static TargetManager;
 
-public class Target : MonoBehaviour
+public class Target : GameBehaviour
 {
     public static event Action<GameObject> OnTargetHit = null;
     public static event Action<GameObject> OnTargetDie = null;
@@ -55,10 +55,10 @@ public class Target : MonoBehaviour
                 break;
         }
 
-        //StartCoroutine(Move());
+        StartCoroutine(Move());
     }
 
-   /* IEnumerator Move()
+    IEnumerator Move()
     {
         for (int i = 0; i < moveDistance; i++)
         {
@@ -66,9 +66,9 @@ public class Target : MonoBehaviour
             yield return null;
         }
         transform.Rotate(Vector3.up * 180);
-        yield return new WaitForSeconds(Random.Range(1, 3));
+        yield return new WaitForSeconds(UnityEngine.Random.Range(1, 3));
         StartCoroutine(Move());
-    }*/
+    }
 
     void Hit(int _damage)
     {
@@ -91,21 +91,30 @@ public class Target : MonoBehaviour
         OnTargetDie?.Invoke(this.gameObject);
 
         //_GM.AddScore(myScore * 2);
-        //_EM.KillEnemy(this.gameObject);
+        //_TM.KillEnemy(this.gameObject);
         //Destroy(this.gameObject);
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    // {
-    //    if (collision.collider.CompareTag("Projectile"))
-    //    {
-    //        health = health - 10;
-    //        gameObject.GetComponent<Renderer>().material.color = Color.red;
-    //
-    //        if (health == 0)
-    //        {
-    //            Destroy(this.gameObject);
-    //        }
-    //    }
-    //}
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Projectile"))
+        {
+            Hit(collision.gameObject.GetComponent<Projectile>().damage);
+            Destroy(collision.gameObject);
+        }
+    }
+
+   /* private void OnCollisionEnter(Collision collision)
+     {
+        if (collision.collider.CompareTag("Projectile"))
+        {
+            myHealth = myHealth - 10;
+            gameObject.GetComponent<Renderer>().material.color = Color.red;
+    
+            if (myHealth == 0)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+    }*/
 }

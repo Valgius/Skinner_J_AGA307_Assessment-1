@@ -24,4 +24,23 @@ public class TargetManager : Singleton<TargetManager>
         GameObject enemy = Instantiate(enemyTypes[rndEnemy], spawnPoints[rndSpawn].position, spawnPoints[rndSpawn].rotation);
         enemies.Add(enemy);
     }
+
+    public void KillTarget(GameObject _target)
+    {
+        if (enemies.Count == 0)
+            return;
+
+        Destroy(_target);
+        enemies.Remove(_target);
+    }
+
+    private void OnEnable()
+    {
+        Target.OnTargetDie += KillTarget;
+    }
+
+    private void OnDisable()
+    {
+        Target.OnTargetDie += KillTarget;
+    }
 }

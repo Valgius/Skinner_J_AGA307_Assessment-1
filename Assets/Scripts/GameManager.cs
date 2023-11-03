@@ -9,7 +9,7 @@ public class GameManager : Singleton<GameManager>
     public Difficulty difficulty;
     public int score = 0;
     int scoreMultiplier = 1;
-    // Start is called before the first frame update
+
     void Start()
     {
         switch(difficulty)

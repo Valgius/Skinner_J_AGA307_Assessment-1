@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    public int damage = 20;
+
+    void Start()
+    {
+        Destroy(this.gameObject, 5);
+    }
+
+    /*private void OnCollisionEnter(Collision collision)
     {
         //Check to see if the collided object has the tag "Target"
         if (collision.collider.CompareTag("Target"))
@@ -16,5 +23,5 @@ public class Projectile : MonoBehaviour
             //Destroy this gameobject
             Destroy(this.gameObject);
         }
-    }  
+    } */
 }
