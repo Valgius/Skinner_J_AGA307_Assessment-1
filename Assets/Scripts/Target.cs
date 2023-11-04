@@ -40,18 +40,22 @@ public class Target : GameBehaviour
                 mySpeed = baseSpeed * 2;
                 myScore = 300;
                 transform.localScale = new Vector3(1,(float)0.02,1) * scaleFactor / 2;
+                gameObject.GetComponent<Renderer>().material.color = Color.blue;
+
                 break;
             case TargetSize.Medium:
                 myHealth = maxHealth = baseHealth;
                 mySpeed = baseSpeed;
                 myScore = 200;
                 transform.localScale = new Vector3(1, (float)0.02, 1) * scaleFactor;
+                gameObject.GetComponent<Renderer>().material.color = Color.green;
                 break;
             case TargetSize.Large:
                 myHealth = maxHealth = baseHealth * 2;
                 mySpeed = baseSpeed / 2;
                 myScore = 100;
                 transform.localScale = new Vector3(1, (float)0.02, 1) * scaleFactor *2;
+                gameObject.GetComponent<Renderer>().material.color = Color.red;
                 break;
         }
 
@@ -81,7 +85,6 @@ public class Target : GameBehaviour
         else
         {
             OnTargetHit?.Invoke(this.gameObject);
-            ///_GM.AddScore(myScore);
         }
     }
 
@@ -89,10 +92,6 @@ public class Target : GameBehaviour
     {
         StopAllCoroutines();
         OnTargetDie?.Invoke(this.gameObject);
-
-        //_GM.AddScore(myScore * 2);
-        //_TM.KillEnemy(this.gameObject);
-        //Destroy(this.gameObject);
     }
 
     private void OnCollisionEnter(Collision collision)

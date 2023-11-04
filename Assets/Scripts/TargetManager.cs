@@ -7,9 +7,9 @@ public class TargetManager : Singleton<TargetManager>
     public enum TargetSize { Small, Medium, Large}
 
     public Transform[] spawnPoints;
-    public GameObject[] enemyTypes;
+    public GameObject[] targetTypes;
 
-    public List<GameObject> enemies;
+    public List<GameObject> targets;
 
     private void Update()
     {
@@ -19,19 +19,26 @@ public class TargetManager : Singleton<TargetManager>
 
     void SpawnAtRandom()
     {
-        int rndEnemy = Random.Range(0, enemyTypes.Length);
+        int rndTarget = Random.Range(0, targetTypes.Length);
         int rndSpawn = Random.Range(0, spawnPoints.Length);
-        GameObject enemy = Instantiate(enemyTypes[rndEnemy], spawnPoints[rndSpawn].position, spawnPoints[rndSpawn].rotation);
-        enemies.Add(enemy);
+        GameObject target = Instantiate(targetTypes[rndTarget], spawnPoints[rndSpawn].position, spawnPoints[rndSpawn].rotation);
+        targets.Add(target);
+        ShowTargetCount();
+    }
+
+    void ShowTargetCount()
+    {
+        _UI.UpdateTargetCount(targets.Count);
     }
 
     public void KillTarget(GameObject _target)
     {
-        if (enemies.Count == 0)
+        if (targets.Count == 0)
             return;
 
         Destroy(_target);
-        enemies.Remove(_target);
+        targets.Remove(_target);
+        ShowTargetCount();
     }
 
     private void OnEnable()
