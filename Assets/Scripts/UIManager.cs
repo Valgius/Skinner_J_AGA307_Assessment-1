@@ -9,6 +9,7 @@ public class UIManager : Singleton<UIManager>
     public TMP_Text timerText;
     public TMP_Text targetCountText;
     public TMP_Text difficultyText;
+    public TMP_Text projectileText;
 
     private void Start()
     {
@@ -16,6 +17,7 @@ public class UIManager : Singleton<UIManager>
         UpdateTimer(0);
         UpdateTargetCount(0);
         UpdateDifficulty();
+        UpdateProjectile();
     }
 
     public void UpdateScore(int _score)
@@ -37,5 +39,10 @@ public class UIManager : Singleton<UIManager>
     public void UpdateDifficulty()
     {
         difficultyText.text = "Difficulty: " + _GM.difficulty.ToString();
+    }
+
+    public void UpdateProjectile()
+    {
+        projectileText.text = "Projectile: " + _PM.projectilePrefab.ToString();
     }
 }

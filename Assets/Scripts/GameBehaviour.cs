@@ -7,6 +7,7 @@ public class GameBehaviour : MonoBehaviour
     protected static GameManager _GM { get { return GameManager.INSTANCE; } }
     protected static TargetManager _TM { get { return TargetManager.INSTANCE; } }
     protected static UIManager _UI { get { return UIManager.INSTANCE; } }
+    protected static ProjectileManager _PM { get { return ProjectileManager.INSTANCE; } }
 
     /// <summary>
     /// Scales all objects in a list to a new scale
