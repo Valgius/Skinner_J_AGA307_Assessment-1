@@ -22,5 +22,4 @@ public class FiringPoint : MonoBehaviour
             Destroy(projectileInstance, 5);
         }
     }
-
 }
