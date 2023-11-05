@@ -12,7 +12,7 @@ public class Singleton <T>:GameBehaviour where T:GameBehaviour
         {
             if (instance_ == null)
             {
-                instance_ = GameObject.FindObjectOfType<T>();
+                instance_ = FindObjectOfType<T>();
                 if (instance_ == null)
                 {
                     GameObject singleton = new GameObject(typeof(T).Name);

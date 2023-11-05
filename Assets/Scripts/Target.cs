@@ -121,7 +121,7 @@ public class Target : GameBehaviour
     {
         if (collision.collider.CompareTag("Projectile"))
         {
-            Hit(collision.gameObject.GetComponent<Projectile>().damage);
+            Hit(collision.gameObject.GetComponent<ProjectileManager>().damage);
             Destroy(collision.gameObject);
         }
     }

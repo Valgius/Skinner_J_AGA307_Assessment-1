@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : GameBehaviour
+public class Projectile : MonoBehaviour
 {
-    public int damage = _PM.damage;
-
     void Start()
     {
         Destroy(this.gameObject, 5);

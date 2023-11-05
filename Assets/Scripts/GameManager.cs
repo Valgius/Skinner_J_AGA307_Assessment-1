@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -12,8 +13,11 @@ public class GameManager : Singleton<GameManager>
     public int score = 0;
     int scoreMultiplier = 1;
 
-    public float maxTime = 500;
+
+    public float maxTime = 30;
     float timer = 30;
+
+    public Image timerFill;
 
     void Start()
     {
@@ -38,7 +42,13 @@ public class GameManager : Singleton<GameManager>
             timer -= Time.deltaTime;
             timer = Mathf.Clamp(timer, 0, maxTime);
             _UI.UpdateTimer(timer);
+            UpdateTimerBar(timer, maxTime);
         }
+    }
+
+    public void UpdateTimerBar(float _time, float _maxTime)
+    {
+        timerFill.fillAmount = MapTo01(_time, 0, _maxTime);
     }
 
     public void AddScore(int _points)
@@ -72,4 +82,10 @@ public class GameManager : Singleton<GameManager>
     {
         gameState = _gameState;
     }
+
+    public void ChangeDifficulty(int _difficulty)
+    {
+        difficulty = (Difficulty)_difficulty;
+    }
+
 }
