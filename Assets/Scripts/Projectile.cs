@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : GameBehaviour
 {
-    public int damage = 20;
+    public int damage = _PM.damage;
 
     void Start()
     {

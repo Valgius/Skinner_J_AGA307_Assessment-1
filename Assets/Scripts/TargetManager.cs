@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TargetManager : Singleton<TargetManager>
 {
-    public enum TargetSize { Small, Medium, Large}
+    public enum TargetSize { Small, Medium, Large }
 
     public Transform[] spawnPoints;
     public GameObject[] targetTypes;
@@ -15,6 +15,9 @@ public class TargetManager : Singleton<TargetManager>
     {
         if (Input.GetKeyDown(KeyCode.I))
             SpawnAtRandom();
+
+     //   if (Input.GetKeyDown(KeyCode.R))
+     //      ChangeTargetSize();
     }
 
     void SpawnAtRandom()
@@ -39,6 +42,20 @@ public class TargetManager : Singleton<TargetManager>
         Destroy(_target);
         targets.Remove(_target);
         ShowTargetCount();
+    }
+
+    //Change targets to random target size.
+    public void ChangeTargetSize()
+    {
+        foreach (GameObject targetTypes in targets)
+        {
+
+        }
+    }
+
+    public Transform GetRandomSpawnPoint()
+    {
+        return spawnPoints[Random.Range(0, spawnPoints.Length)];
     }
 
     private void OnEnable()

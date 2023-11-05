@@ -24,11 +24,10 @@ public class Target : GameBehaviour
     [Header("AI")]
     public TargetSize mySize;
     public Transform[] spawnPoints;
-    public Transform moveToPos;     //Needed for all patrols
-    Transform startPos;             //Needed for loop patrol movement
-    Transform endPos;               //Needed for loop patrol movement
-    bool reverse;                   //Needed for loop patrol movement
-    //int patrolPoint = 0;            //Needed for Linear partol Movement
+    public Transform moveToPos;     //Needed for movement
+    Transform startPos;             //Needed for movement
+    Transform endPos;               //Needed for movement
+
 
 
     private void Start()
@@ -40,7 +39,7 @@ public class Target : GameBehaviour
                 mySpeed = baseSpeed * 2;
                 myScore = 300;
                 transform.localScale = new Vector3(1,(float)0.02,1) * scaleFactor / 2;
-                gameObject.GetComponent<Renderer>().material.color = Color.blue;
+                gameObject.GetComponent<Renderer>().material.color = Color.red;
 
                 break;
             case TargetSize.Medium:
@@ -48,18 +47,27 @@ public class Target : GameBehaviour
                 mySpeed = baseSpeed;
                 myScore = 200;
                 transform.localScale = new Vector3(1, (float)0.02, 1) * scaleFactor;
-                gameObject.GetComponent<Renderer>().material.color = Color.green;
+                gameObject.GetComponent<Renderer>().material.color = Color.yellow;
                 break;
             case TargetSize.Large:
                 myHealth = maxHealth = baseHealth * 2;
                 mySpeed = baseSpeed / 2;
                 myScore = 100;
                 transform.localScale = new Vector3(1, (float)0.02, 1) * scaleFactor *2;
-                gameObject.GetComponent<Renderer>().material.color = Color.red;
+                gameObject.GetComponent<Renderer>().material.color = Color.green;
                 break;
         }
 
-        StartCoroutine(Move());
+        SetupAI();
+
+    }
+
+    void SetupAI()
+    {
+        startPos = Instantiate(new GameObject(), transform.position, transform.rotation).transform;
+        endPos = _TM.GetRandomSpawnPoint();
+        moveToPos = endPos;
+        StartCoroutine(RandomMove());
     }
 
     IEnumerator Move()
@@ -72,6 +80,21 @@ public class Target : GameBehaviour
         transform.Rotate(Vector3.up * 180);
         yield return new WaitForSeconds(UnityEngine.Random.Range(1, 3));
         StartCoroutine(Move());
+    }
+
+    IEnumerator RandomMove()
+    {
+        moveToPos = _TM.GetRandomSpawnPoint();
+
+        transform.LookAt(moveToPos);
+        while (Vector3.Distance(transform.position, moveToPos.position) > 0.3f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, moveToPos.position, Time.deltaTime * mySpeed);
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(3);
+        StartCoroutine(RandomMove());
     }
 
     void Hit(int _damage)

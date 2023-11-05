@@ -115,4 +115,5 @@ MonoBehaviour:
   myHealth: 0
   myScore: 0
   mySize: 0
+  spawnPoints: []
   moveToPos: {fileID: 0}
