@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    public int damage = 30;
+
     void Start()
     {
         Destroy(this.gameObject, 5);
